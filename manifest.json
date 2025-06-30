@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Word of the Day",
+    "version": "1.0",
+    "description": "A simple Chrome extension that shows a new word every day.",
+    "permissions": [],
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "icons/16.png",
+        "24": "icons/24.png",
+        "32": "icons/32.png"
+      }
+    },
+    "icons": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    }
+  }
