@@ -1,34 +1,57 @@
 const endpoint = "https://words.url2.at/words";
 
-document.addEventListener("DOMContentLoaded", async () => {
-    // Fetch random word and set it in the DOM on page load.
-    fetchAndSetWord();
-
-    //  Add event listener to the next word button
-    const nextWordButton = document.getElementById("refresh-button");
-    nextWordButton.addEventListener("click", async () => {
-        fetchAndSetWord();
-    });
-});
-
-async function fetchAndSetWord() {
-    // Fetch DOM elements
+async function nextWord() {
     const wordElement = document.getElementById("word");
     const definitionElement = document.getElementById("definition");
-    const exampleElement = document.getElementById("example");
+    const speechPartElement = document.getElementById("speech-part");
 
-    // Fetch a random word from the server
-    const randomWord = await getRandomWord();
-    // Update the DOM elements with the fetched word
-    wordElement.innerHTML = randomWord._id;
-    definitionElement.innerHTML = randomWord.meanings[0].definition
-    exampleElement.innerHTML = randomWord.meanings[0].example;
+    if (!wordElement || !definitionElement) {
+        return;
+    }
+
+    wordElement.style.opacity = "0";
+
+    try {
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const nextWordText = data._id || "Unknown word";
+        const nextDefinitionText =
+            (Array.isArray(data.meanings) &&
+                data.meanings[0] &&
+                data.meanings[0].definition) ||
+            "Definition not available.";
+        const nextSpeechPartText =
+            (Array.isArray(data.meanings) &&
+                data.meanings[0] &&
+                data.meanings[0].speech_part) ||
+            "";
+
+        setTimeout(() => {
+            wordElement.textContent = nextWordText;
+            definitionElement.textContent = nextDefinitionText;
+            if (speechPartElement) {
+                speechPartElement.textContent = nextSpeechPartText;
+            }
+
+            wordElement.style.transition = "opacity 0.5s ease";
+            wordElement.style.opacity = "1";
+        }, 200);
+    } catch (error) {
+        console.error("Failed to fetch next word:", error);
+        wordElement.style.opacity = "1";
+    }
 }
 
-async function getRandomWord() {
-    // make a POST request to the server
-    const response = await fetch(endpoint);
-    // Process the response
-    return await response.json();
-}
-
+document.addEventListener("DOMContentLoaded", () => {
+    const nextWordButton = document.getElementById("refresh-button");
+    if (nextWordButton) {
+        nextWordButton.addEventListener("click", () => nextWord());
+    }
+    nextWord();
+});

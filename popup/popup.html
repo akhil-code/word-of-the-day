@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="title">Word of the day !</div>
-  <div class="container">
-    <div class="word" id="word">Loading...</div>
-    <div class="definition" id="definition"></div>
-    <div class="example" id="example"></div>
-    <button class="refresh-btn" id="refresh-button">Next word</button>
+  <!-- <div class="title">Word of the Day</div> -->
+  <div class="word-card">
+    <div class="word-label">Word of the Day</div>
+    <h2 class="word-title" id="word">Loading...</h2>
+    <p class="word-speech-part" id="speech-part"></p>
+    <p class="word-definition" id="definition">Fetching today's word...</p>
+    <button class="btn-next" id="refresh-button">Next Word →</button>
   </div>
 </body>
 <script src="popup.js"></script>
