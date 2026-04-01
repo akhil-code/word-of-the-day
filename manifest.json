@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Word of the Day",
-    "version": "1.0.1",
-    "description": "A simple Chrome extension that shows a new word every day.",
+    "name": "Word of the Day: Vocabulary & Definitions - words.url2.at",
+    "version": "1.0.3",
+    "description": "Free daily English vocabulary in your toolbar: word, definition, and part of speech - no account, no ads, no payments",
     "permissions": [],
     "action": {
       "default_popup": "popup/popup.html",
