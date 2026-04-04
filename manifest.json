@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Word of the Day: Vocabulary & Definitions - words.url2.at",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Free daily English vocabulary in your toolbar: word, definition, and part of speech - no account, no ads, no payments",
     "permissions": [],
     "action": {
